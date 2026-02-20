@@ -14,6 +14,7 @@ import {
 import { Form, FormSeparator } from "@components/shared/form";
 import { Input } from "@components/shared/input";
 import { Button } from "@components/shared/button";
+import { Paragraph } from "@/components/shared/paragraph";
 import { Link } from "@components/shared/link";
 import { ContinueWithGoogleButton } from "@components/features/auth/continue-with-google-button";
 
@@ -61,12 +62,12 @@ export default function SignInPage(): React.ReactNode {
           </CardContent>
 
           <CardFooter>
-            <p>
+            <Paragraph>
               Don't have an account?{" "}
               <Link href="/sign-up" color="primary" isUnderlinedOnHover>
                 Sign Up
               </Link>
-            </p>
+            </Paragraph>
 
             <FormSeparator />
 
