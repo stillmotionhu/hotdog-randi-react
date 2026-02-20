@@ -1,4 +1,4 @@
-import { ParentComponentProps } from "@app/types/parent-component-props";
+import { ParentComponentProps } from "@/types/parent-component-props";
 import { props } from "@stylexjs/stylex";
 
 import Link from "next/link";

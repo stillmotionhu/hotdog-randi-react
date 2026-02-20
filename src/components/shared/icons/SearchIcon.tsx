@@ -1,4 +1,4 @@
-import { IconComponentProps } from "@app/types/icon-component-props";
+import { IconComponentProps } from "@/types/icon-component-props";
 import { props } from "@stylexjs/stylex";
 
 import { styles } from "./Icon.stylex";
