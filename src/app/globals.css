@@ -1,6 +1,9 @@
 :root {
-  --background: #fefefe;
-  --foreground: #171717;
+  --background: 254, 247, 244;
+  --foreground: 0, 42, 50;
+  --primary-color: 245, 165, 36;
+  --danger-color: 220, 13, 49;
+  --container-width: 90vw;
 }
 
 html,
@@ -10,20 +13,17 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+  font-family: "Stack Sans Text", Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@stylex;

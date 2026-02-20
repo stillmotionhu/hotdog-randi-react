@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  trailingSlash: true,
+  sassOptions: {
+    implementation: "sass",
+  },
 };
 
 export default nextConfig;
