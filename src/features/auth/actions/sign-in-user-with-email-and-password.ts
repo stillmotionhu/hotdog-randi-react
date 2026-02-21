@@ -6,7 +6,7 @@ import {
 import { AppDispatch } from "@/app/store";
 import { signInFailed, signInLoading } from "@/features/sign-in/sign-in-slice";
 import { FirebaseError } from "firebase/app";
-import { Error } from "@/types/error";
+import { FormResponse } from "@/types/form-response";
 
 export type SignInPayload = {
   email: string;
@@ -16,7 +16,7 @@ export type SignInPayload = {
 export function signInUserWithEmailAndPassword(payload: SignInPayload) {
   return async function signInUserWithEmailAndPasswordThunk(
     dispatch: AppDispatch,
-  ) {
+  ): Promise<FormResponse> {
     dispatch(signInLoading());
 
     const { email, password } = payload;
@@ -35,36 +35,66 @@ export function signInUserWithEmailAndPassword(payload: SignInPayload) {
         password,
       );
 
-      return userCredential;
+      return {
+        success: true,
+      };
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
-        let payload: Error;
+        let payload: FormResponse;
 
         switch (error.code) {
           case "auth/invalid-credential":
             payload = {
-              code: "sign-in/invalid-credential",
-              message: "The provided email address or password is invalid.",
+              success: false,
+              error: {
+                code: "sign-in/invalid-credential",
+                message: "The provided email address or password is invalid.",
+                target: "password",
+                secondaryTarget: "email",
+              },
             };
+
+            break;
+          case "auth/too-many-requests":
+            payload = {
+              success: false,
+              error: {
+                code: "sign-in/too-many-requests",
+                message: "Too many requests. Please try again later.",
+                target: "password",
+                secondaryTarget: "email",
+              },
+            };
+
             break;
           default:
             payload = {
-              code: "sign-in/unknown-error",
-              message: "An unknown error occurred during sign in.",
+              success: false,
+              error: {
+                code: "sign-in/unknown-error",
+                message: "An unknown error occurred during sign in.",
+                target: "password",
+                secondaryTarget: "email",
+              },
             };
         }
 
-        dispatch(signInFailed(payload));
+        dispatch(signInFailed());
 
-        return;
+        return payload;
       }
 
-      dispatch(
-        signInFailed({
+      dispatch(signInFailed());
+
+      return {
+        success: false,
+        error: {
           code: "sign-in/unknown-error",
           message: "An unknown error occurred during sign in.",
-        }),
-      );
+          target: "password",
+          secondaryTarget: "email",
+        },
+      };
     }
   };
 }

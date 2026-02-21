@@ -22,6 +22,7 @@ function fetchUserDataByUid(uid: string) {
         authFailed({
           code: "auth/user-not-found",
           message: "No user found with the provided UID.",
+          from: "firebase",
         }),
       );
     }

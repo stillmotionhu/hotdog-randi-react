@@ -25,36 +25,22 @@ const buttonStyles = create({
       ":not(:disabled):active": "scale(.95)",
     },
     transition: `transform .25s cubic-bezier(0.44, 1.14, 0.43, 1.32),
-      color .35s ease-in-out,
-      background-image .45s ease-in-out`,
+      color .25s ease-in-out,
+      background .25s ease-in-out`,
   },
   wrapperGoogleVariant: {
     color: "rgb(var(--background))",
-    backgroundImage: `
-      linear-gradient(
-        145deg,
-        color-mix(in srgb, rgba(var(--foreground, 0.5)), white 2%),
-        color-mix(in srgb, rgba(var(--foreground, 0.5)), black 5%)
-      )`,
+    backgroundColor: "rgba(var(--foreground, 0.5))",
   },
   wrapperPrimaryColor: {
     color: {
       default: "rgb(var(--foreground))",
-      ":disabled": "color-mix(in srgb, rgb(var(--foreground)), white 20%)",
+      ":disabled": "color-mix(in srgb, rgb(var(--foreground)), white 25%)",
     },
-    backgroundImage: {
-      default: `
-        linear-gradient(
-          145deg,
-          color-mix(in srgb, rgba(var(--primary-color, 0.5)), white 15%),
-          color-mix(in srgb, rgba(var(--primary-color, 0.5)), black 5%)
-        )`,
-      ":disabled": `
-        linear-gradient(
-          145deg,
-          color-mix(in srgb, rgba(var(--primary-color, 0.5)), white 30%),
-          color-mix(in srgb, rgba(var(--primary-color, 0.5)), white 25%)
-        )`,
+    backgroundColor: {
+      default: "rgba(var(--primary-color))",
+      ":disabled":
+        "color-mix(in srgb, rgba(var(--primary-color, 0.5)), white 20%)",
     },
   },
   wrapperDangerColor: {
@@ -62,18 +48,10 @@ const buttonStyles = create({
       default: "rgb(var(--background))",
       ":disabled": "color-mix(in srgb, rgb(var(--background)), black 5%)",
     },
-    backgroundImage: {
-      default: `
-        linear-gradient(
-          145deg,
-          color-mix(in srgb, rgba(var(--danger-color, 0.5)), white 15%),
-          color-mix(in srgb, rgba(var(--danger-color, 0.5)), black 5%)
-        )`,
-      ":disabled": `linear-gradient(
-          145deg,
-          color-mix(in srgb, rgba(var(--danger-color, 0.5)), white 30%),
-          color-mix(in srgb, rgba(var(--danger-color, 0.5)), white 25%)
-        )`,
+    backgroundColor: {
+      default: "rgb(var(--danger-color, 0.5))",
+      ":disabled":
+        "color-mix(in srgb, rgba(var(--danger-color, 0.5)), white 20%)",
     },
   },
   wrapperCompactSize: {
@@ -93,6 +71,12 @@ const buttonStyles = create({
   },
   containerLoadingStateCompactSize: {
     transform: "translateY(-40px)",
+  },
+  containerFailedState: {
+    transform: "translateY(-120px)",
+  },
+  containerFailedStateCompactSize: {
+    transform: "translateY(-80px)",
   },
   label: {
     display: "flex",

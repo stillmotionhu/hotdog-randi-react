@@ -23,6 +23,7 @@ interface ButtonProps extends ParentComponentProps {
   size?: ButtonSize;
   isDisabled?: boolean;
   isLoading?: boolean;
+  isFailed?: boolean;
   onClick?: () => void;
 }
 
@@ -34,6 +35,7 @@ const Button: React.FC<ButtonProps> = ({
   size = "default",
   isDisabled = false,
   isLoading,
+  isFailed,
   onClick,
 }) => {
   const ButtonLabel: React.FC<ParentComponentProps> = ({ children }) => {
@@ -51,10 +53,12 @@ const Button: React.FC<ButtonProps> = ({
       {...props(
         styles.wrapper,
         variant === "google" && styles.wrapperGoogleVariant,
-        variant === "default" &&
-          (color === "primary"
-            ? styles.wrapperPrimaryColor
-            : color === "danger" && styles.wrapperDangerColor),
+        isFailed
+          ? styles.wrapperDangerColor
+          : variant === "default" &&
+              (color === "primary"
+                ? styles.wrapperPrimaryColor
+                : color === "danger" && styles.wrapperDangerColor),
         size === "compact" && styles.wrapperCompactSize,
       )}
       type={type}
@@ -70,7 +74,11 @@ const Button: React.FC<ButtonProps> = ({
             ? size === "default"
               ? styles.containerLoadingState
               : styles.containerLoadingStateCompactSize
-            : styles.containerIdleState,
+            : isFailed
+              ? size === "default"
+                ? styles.containerFailedState
+                : styles.containerFailedStateCompactSize
+              : styles.containerIdleState,
         )}
       >
         <ButtonLabel>{children}</ButtonLabel>
@@ -79,6 +87,7 @@ const Button: React.FC<ButtonProps> = ({
             <Spinner color="foreground" size="small" isIconOnly />
           </ButtonLabel>
         )}
+        {typeof isFailed !== "undefined" && <ButtonLabel>Oooops!</ButtonLabel>}
       </div>
     </button>
   );

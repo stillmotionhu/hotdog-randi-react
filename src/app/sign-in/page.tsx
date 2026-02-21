@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import {
   SignInPayload,
@@ -10,6 +9,7 @@ import {
   handleFormOnChange,
   setSignInEmail,
   setSignInPassword,
+  signInIdle,
   SignInState,
 } from "@features/sign-in/sign-in-slice";
 
@@ -28,24 +28,22 @@ import { Button } from "@components/shared/button";
 import { Paragraph } from "@/components/shared/paragraph";
 import { Link } from "@components/shared/link";
 import { ContinueWithGoogleButton } from "@components/features/auth/continue-with-google-button";
+import { FormResponse } from "@/types/form-response";
 
 export default function SignInPage(): React.ReactNode {
-  const { data, isSubmitButtonDisabled, status, error }: SignInState =
-    useAppSelector((state) => state.signIn);
+  const { data, isSubmitButtonDisabled, status }: SignInState = useAppSelector(
+    (state) => state.signIn,
+  );
   const dispatch = useAppDispatch();
 
-  const handleSignInFormSubmit = (): void => {
+  const handleSignInFormSubmit = async (): Promise<FormResponse> => {
     const payload: SignInPayload = {
       email: data.email,
       password: data.password,
     };
 
-    dispatch(signInUserWithEmailAndPassword(payload));
+    return dispatch(signInUserWithEmailAndPassword(payload));
   };
-
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
 
   return (
     <PageContainer isCentered>
@@ -59,6 +57,7 @@ export default function SignInPage(): React.ReactNode {
             <Form
               onChange={() => dispatch(handleFormOnChange())}
               onSubmit={handleSignInFormSubmit}
+              resetFormStatus={() => dispatch(signInIdle())}
             >
               <Input
                 type="email"
@@ -86,6 +85,7 @@ export default function SignInPage(): React.ReactNode {
                 type="submit"
                 isDisabled={isSubmitButtonDisabled}
                 isLoading={status === "loading"}
+                isFailed={status === "failed"}
               >
                 Sign In
               </Button>

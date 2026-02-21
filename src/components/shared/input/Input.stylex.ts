@@ -2,6 +2,11 @@ import { create } from "@stylexjs/stylex";
 
 const inputStyles = create({
   wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    gap: ".65rem",
+  },
+  fieldWrapper: {
     position: "relative",
     display: "inline-block",
     width: "100%",
@@ -41,8 +46,12 @@ const inputStyles = create({
     ":has(~ svg)": {
       paddingLeft: "calc(25px + 1rem + 6px)",
     },
+    transition: "color .25s ease-in-out",
   },
-  label: {
+  fieldHasError: {
+    color: "color-mix(in srgb, rgb(var(--danger-color)), black 10%)",
+  },
+  fieldLabel: {
     position: "absolute",
     top: "7px",
     left: "1px",
@@ -54,21 +63,35 @@ const inputStyles = create({
     padding: "15px 25px",
     cursor: "text",
   },
-  labelText: {
+  fieldLabelText: {
     fontSize: "1rem",
     fontWeight: 600,
     lineHeight: "1rem",
     color: "rgb(100, 100, 100)",
+    transition: "color .25s ease-in-out",
   },
-  labelTextHidden: {
+  fieldLabelTextHidden: {
     visibility: "hidden",
   },
-  labelTextRequired: {
+  fieldLabelTextRequired: {
     "::after": {
       content: "*",
       color: "rgb(var(--danger-color))",
       marginLeft: "2px",
     },
+  },
+  fieldLabelHasError: {
+    color: "color-mix(in srgb, rgb(var(--danger-color)), black 10%)",
+  },
+  errorWrapper: {
+    display: "block",
+    marginLeft: 2,
+    marginBottom: 5,
+  },
+  errorText: {
+    fontSize: ".875rem",
+    fontWeight: 500,
+    color: "rgb(var(--danger-color))",
   },
 });
 

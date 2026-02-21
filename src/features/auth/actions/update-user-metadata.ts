@@ -15,6 +15,7 @@ function updateUserMetadata(uid: string, payload: UpdateUserMetadataPayload) {
         authFailed({
           code: "auth/update-user-metadata-failed",
           message: "Failed to update user metadata: Missing required fields.",
+          from: "firebase",
         }),
       );
 

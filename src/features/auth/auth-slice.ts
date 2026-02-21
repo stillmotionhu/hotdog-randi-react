@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { User } from "@/collections/User";
-import { Error } from "@/types/error";
+import { FetchError } from "@/types/fetch-error";
 
 /**
  * TYPES
@@ -10,7 +10,7 @@ type AuthStatus = "idle" | "loading" | "failed";
 export interface AuthState {
   user: User | null;
   status: AuthStatus;
-  error: Error | null;
+  error: FetchError | null;
   isLoggedIn: boolean;
 }
 
@@ -37,7 +37,7 @@ const authSlice = createSlice({
     authLoading: (state: AuthState) => {
       state.status = "loading";
     },
-    authFailed: (state: AuthState, action: PayloadAction<Error>) => {
+    authFailed: (state: AuthState, action: PayloadAction<FetchError>) => {
       state.status = "failed";
       state.error = action.payload;
     },

@@ -1,5 +1,5 @@
-import { Error } from "@/types/error";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FormError } from "@/types/form-error";
 
 /**
  * TYPES
@@ -13,7 +13,6 @@ export interface SignInState {
   };
   isSubmitButtonDisabled: boolean;
   status: SignInStatus;
-  error: Error | null;
 }
 
 /**
@@ -26,7 +25,6 @@ const initialState: SignInState = {
   },
   isSubmitButtonDisabled: true,
   status: "idle",
-  error: null,
 };
 
 /**
@@ -42,9 +40,8 @@ const signInSlice = createSlice({
     signInLoading: (state: SignInState) => {
       state.status = "loading";
     },
-    signInFailed: (state: SignInState, action) => {
+    signInFailed: (state: SignInState) => {
       state.status = "failed";
-      state.error = action.payload;
     },
     setSignInEmail: (state: SignInState, action: PayloadAction<string>) => {
       state.data.email = action.payload;
