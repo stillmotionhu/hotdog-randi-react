@@ -4,6 +4,7 @@ import { props } from "@stylexjs/stylex";
 import { SearchIcon } from "@components/shared/icons";
 
 import { styles } from "./Input.stylex";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 /**
  * TYPES
@@ -22,7 +23,9 @@ interface InputProps {
   maxlength?: number;
   required?: boolean;
   value: string;
-  onValueChange?: Dispatch<SetStateAction<string>>;
+  onValueChange?:
+    | Dispatch<SetStateAction<string>>
+    | ((value: string) => PayloadAction<string>);
   errors?: string[];
 }
 

@@ -5,11 +5,16 @@ import {
   UnknownAction,
 } from "@reduxjs/toolkit";
 
-import authReducer from "@/features/auth/auth-slice";
+/**
+ * REDUCERS
+ */
+import authReducer from "@features/auth/auth-slice";
+import signInReducer from "@features/sign-in/sign-in-slice";
 
 const store: EnhancedStore = configureStore({
   reducer: {
     auth: authReducer,
+    signIn: signInReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

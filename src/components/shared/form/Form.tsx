@@ -8,11 +8,24 @@ import { styles } from "./Form.stylex";
  */
 interface FormProps extends ParentComponentProps {
   noValidate?: boolean;
+  onChange?: () => void;
+  onSubmit?: () => void;
 }
 
-const Form: React.FC<FormProps> = ({ children, noValidate = false }) => {
+const Form: React.FC<FormProps> = ({
+  children,
+  noValidate = false,
+  onChange,
+  onSubmit,
+}) => {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
+    if (typeof onSubmit === "undefined") {
+      return;
+    }
+
+    onSubmit();
   };
 
   return (
@@ -20,6 +33,7 @@ const Form: React.FC<FormProps> = ({ children, noValidate = false }) => {
       {...props(styles.wrapper)}
       noValidate={noValidate}
       onSubmit={handleFormSubmit}
+      onChange={onChange}
     >
       {children}
     </form>

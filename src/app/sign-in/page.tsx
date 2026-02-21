@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useAppDispatch } from "@app/hooks";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@app/hooks";
 import {
   SignInPayload,
   signInUserWithEmailAndPassword,
 } from "@features/auth/actions";
+import {
+  handleFormOnChange,
+  setSignInEmail,
+  setSignInPassword,
+  SignInState,
+} from "@features/sign-in/sign-in-slice";
 
 import { PageContainer } from "@components/layout/page";
 import {
@@ -24,26 +30,22 @@ import { Link } from "@components/shared/link";
 import { ContinueWithGoogleButton } from "@components/features/auth/continue-with-google-button";
 
 export default function SignInPage(): React.ReactNode {
+  const { data, isSubmitButtonDisabled, status, error }: SignInState =
+    useAppSelector((state) => state.signIn);
   const dispatch = useAppDispatch();
-
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] =
-    useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSignInFormSubmit = (): void => {
     const payload: SignInPayload = {
-      email,
-      password,
+      email: data.email,
+      password: data.password,
     };
 
     dispatch(signInUserWithEmailAndPassword(payload));
   };
 
-  useEffect((): void => {
-    setIsSubmitButtonDisabled(!(email.trim() && password.trim()));
-  }, [email, password]);
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   return (
     <PageContainer isCentered>
@@ -54,15 +56,20 @@ export default function SignInPage(): React.ReactNode {
           </CardHeader>
 
           <CardContent>
-            <Form>
+            <Form
+              onChange={() => dispatch(handleFormOnChange())}
+              onSubmit={handleSignInFormSubmit}
+            >
               <Input
                 type="email"
                 name="email"
                 label="Email Address"
                 autocomplete="email"
                 required
-                value={email}
-                onValueChange={setEmail}
+                value={data.email}
+                onValueChange={(value: string) =>
+                  dispatch(setSignInEmail(value))
+                }
               />
               <Input
                 type="password"
@@ -70,14 +77,15 @@ export default function SignInPage(): React.ReactNode {
                 label="Password"
                 autocomplete="password"
                 required
-                value={password}
-                onValueChange={setPassword}
+                value={data.password}
+                onValueChange={(value: string) =>
+                  dispatch(setSignInPassword(value))
+                }
               />
               <Button
                 type="submit"
                 isDisabled={isSubmitButtonDisabled}
-                isLoading={isLoading}
-                onClick={handleSignInFormSubmit}
+                isLoading={status === "loading"}
               >
                 Sign In
               </Button>
