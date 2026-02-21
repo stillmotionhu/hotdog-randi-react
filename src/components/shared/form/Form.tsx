@@ -11,8 +11,16 @@ interface FormProps extends ParentComponentProps {
 }
 
 const Form: React.FC<FormProps> = ({ children, noValidate = false }) => {
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+  };
+
   return (
-    <form {...props(styles.wrapper)} noValidate={noValidate}>
+    <form
+      {...props(styles.wrapper)}
+      noValidate={noValidate}
+      onSubmit={handleFormSubmit}
+    >
       {children}
     </form>
   );

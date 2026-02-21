@@ -21,7 +21,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@features/*": ["./src/features/*"],
+      "@collections/*": ["./src/collections/*"],
+      "@providers/*": ["./src/providers/*"]
     }
   },
   "include": [

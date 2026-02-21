@@ -1,6 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "@app/hooks";
+import {
+  SignInPayload,
+  signInUserWithEmailAndPassword,
+} from "@features/auth/actions";
 
 import { PageContainer } from "@components/layout/page";
 import {
@@ -19,13 +24,26 @@ import { Link } from "@components/shared/link";
 import { ContinueWithGoogleButton } from "@components/features/auth/continue-with-google-button";
 
 export default function SignInPage(): React.ReactNode {
+  const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] =
+    useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSignInFormSubmit = (): void => {
-    setIsLoading(true);
+    const payload: SignInPayload = {
+      email,
+      password,
+    };
+
+    dispatch(signInUserWithEmailAndPassword(payload));
   };
+
+  useEffect((): void => {
+    setIsSubmitButtonDisabled(!(email.trim() && password.trim()));
+  }, [email, password]);
 
   return (
     <PageContainer isCentered>
@@ -55,7 +73,12 @@ export default function SignInPage(): React.ReactNode {
                 value={password}
                 onValueChange={setPassword}
               />
-              <Button isLoading={isLoading} onClick={handleSignInFormSubmit}>
+              <Button
+                type="submit"
+                isDisabled={isSubmitButtonDisabled}
+                isLoading={isLoading}
+                onClick={handleSignInFormSubmit}
+              >
                 Sign In
               </Button>
             </Form>
