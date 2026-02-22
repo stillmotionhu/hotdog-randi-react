@@ -30,17 +30,17 @@ const buttonStyles = create({
   },
   wrapperGoogleVariant: {
     color: "rgb(var(--background))",
-    backgroundColor: "rgba(var(--foreground, 0.5))",
+    backgroundColor: "rgba(var(--foreground), 0.93)",
   },
   wrapperPrimaryColor: {
     color: {
       default: "rgb(var(--foreground))",
-      ":disabled": "color-mix(in srgb, rgb(var(--foreground)), white 25%)",
+      ":disabled": "color-mix(in srgb, rgba(var(--foreground)), white 25%)",
     },
     backgroundColor: {
-      default: "rgba(var(--primary-color))",
+      default: "rgba(var(--primary-color), 0.75)",
       ":disabled":
-        "color-mix(in srgb, rgba(var(--primary-color, 0.5)), white 20%)",
+        "color-mix(in srgb, rgba(var(--primary-color), 0.75), white 15%)",
     },
   },
   wrapperDangerColor: {
@@ -49,9 +49,9 @@ const buttonStyles = create({
       ":disabled": "color-mix(in srgb, rgb(var(--background)), black 5%)",
     },
     backgroundColor: {
-      default: "rgb(var(--danger-color, 0.5))",
+      default: "rgb(var(--danger-color), 0.75)",
       ":disabled":
-        "color-mix(in srgb, rgba(var(--danger-color, 0.5)), white 20%)",
+        "color-mix(in srgb, rgba(var(--danger-color), 0.75), white 20%)",
     },
   },
   wrapperCompactSize: {

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Providers } from "./providers";
+import { props } from "@stylexjs/stylex";
+
+import { Providers } from "@/app/providers";
+import { PageWrapper } from "@components/layout/page";
 
 import "./globals.css";
 
-import { PageWrapper } from "@components/layout/page";
+import { styles } from "./layout.stylex";
 
 export const metadata: Metadata = {
   title: "Hot-Dog Randevouz",
@@ -25,7 +28,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body {...props(styles.body)}>
         <Providers>
           <PageWrapper>{children}</PageWrapper>
         </Providers>

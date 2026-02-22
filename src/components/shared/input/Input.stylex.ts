@@ -11,7 +11,7 @@ const inputStyles = create({
     display: "inline-block",
     width: "100%",
     height: "60px",
-    backgroundColor: "rgba(255, 255, 255, .6)",
+    backgroundColor: "rgba(255, 255, 255, .4)",
     borderRadius: "30px",
     borderWidth: 1,
     borderStyle: "solid",
