@@ -19,7 +19,14 @@ import { FormError } from "@/types/form-error";
  * TYPES
  */
 type InputType = "text" | "email" | "password" | "search";
-type InputAutocompleteType = "off" | "name" | "tel" | "email" | "password";
+type InputAutocompleteType =
+  | "off"
+  | "given-name"
+  | "family-name"
+  | "tel"
+  | "email"
+  | "new-password"
+  | "current-password";
 
 interface InputError {
   primary: FormError | undefined;

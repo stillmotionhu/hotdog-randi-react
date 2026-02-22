@@ -9,7 +9,7 @@ import { styles } from "./Card.stylex";
 interface CardProps extends ParentComponentProps {}
 
 const Card: React.FC<CardProps> = ({ children }) => {
-  return <div {...props(styles.wrapper)}>{children}</div>;
+  return <section {...props(styles.wrapper)}>{children}</section>;
 };
 
 /**

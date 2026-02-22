@@ -22,7 +22,7 @@ const formStyles = create({
       left: 0,
       width: "calc(50% - 20px)",
       height: "2px",
-      backgroundColor: "rgb(150, 150, 150)",
+      backgroundColor: "rgba(var(--foreground), 0.35)",
       transform: "translateY(-50%)",
     },
     "::after": {
@@ -33,12 +33,12 @@ const formStyles = create({
       right: 0,
       width: "calc(50% - 20px)",
       height: "2px",
-      backgroundColor: "rgb(150, 150, 150)",
+      backgroundColor: "rgba(var(--foreground), 0.35)",
       transform: "translateY(-50%)",
     },
   },
   separatorText: {
-    color: "rgb(150, 150, 150)",
+    color: "rgba(var(--foreground), 0.35)",
     fontSize: "0.875rem",
     textTransform: "uppercase",
   },

@@ -3,7 +3,7 @@
   --foreground: 0, 42, 50;
   --primary-color: 245, 165, 36;
   --danger-color: 200, 13, 39;
-  --container-width: 90vw;
+  --container-width: 95vw;
 }
 
 * {
@@ -13,12 +13,24 @@
 @keyframes reveal-element {
   0% {
     opacity: 0;
-    transform: scale(0.7, 0.7) translateY(15px);
+    transform: scale(0.7, 0.8) translateY(15px);
   }
 
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes reveal-card {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

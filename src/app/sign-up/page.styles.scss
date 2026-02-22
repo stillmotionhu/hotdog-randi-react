@@ -1,4 +1,4 @@
-#signInPage {
+#signUpPage {
   section {
     animation-name: reveal-card;
     animation-duration: 0.5s;
@@ -16,7 +16,7 @@
   }
 
   form > * {
-    @for $i from 1 through 3 {
+    @for $i from 1 through 6 {
       &:nth-child(#{$i}) {
         animation-delay: #{0.025 * $i}s;
       }
@@ -26,7 +26,7 @@
   footer > * {
     @for $i from 1 through 3 {
       &:nth-child(#{$i}) {
-        animation-delay: #{0.025 * (3 + $i)}s;
+        animation-delay: #{0.025 * (6 + $i)}s;
       }
     }
   }

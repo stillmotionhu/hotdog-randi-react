@@ -6,12 +6,13 @@ import {
   signInUserWithEmailAndPassword,
 } from "@features/auth/actions";
 import {
-  handleFormOnChange,
+  handleSignInFormOnChange,
   setSignInEmail,
   setSignInPassword,
   signInIdle,
   SignInState,
 } from "@features/sign-in/sign-in-slice";
+import { FormResponse } from "@/types/form-response";
 
 import { PageContainer } from "@components/layout/page";
 import {
@@ -28,7 +29,6 @@ import { Button } from "@components/shared/button";
 import { Paragraph } from "@/components/shared/paragraph";
 import { Link } from "@components/shared/link";
 import { ContinueWithGoogleButton } from "@components/features/auth/continue-with-google-button";
-import { FormResponse } from "@/types/form-response";
 
 /**
  * STYLES FOR THE WHOLE PAGE
@@ -60,7 +60,7 @@ export default function SignInPage(): React.ReactNode {
 
           <CardContent>
             <Form
-              onChange={() => dispatch(handleFormOnChange())}
+              onChange={() => dispatch(handleSignInFormOnChange())}
               onSubmit={handleSignInFormSubmit}
               resetFormStatus={() => dispatch(signInIdle())}
             >
@@ -79,7 +79,7 @@ export default function SignInPage(): React.ReactNode {
                 type="password"
                 name="password"
                 label="Password"
-                autocomplete="password"
+                autocomplete="current-password"
                 required
                 value={data.password}
                 onValueChange={(value: string) =>

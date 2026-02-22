@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FormError } from "@/types/form-error";
 
 /**
  * TYPES
@@ -49,7 +48,7 @@ const signInSlice = createSlice({
     setSignInPassword: (state: SignInState, action: PayloadAction<string>) => {
       state.data.password = action.payload;
     },
-    handleFormOnChange: (state: SignInState) => {
+    handleSignInFormOnChange: (state: SignInState) => {
       const { data } = state;
       const { email, password } = data;
 
@@ -66,7 +65,7 @@ export const {
   signInFailed,
   setSignInEmail,
   setSignInPassword,
-  handleFormOnChange,
+  handleSignInFormOnChange,
 } = actions;
 
 export default reducer;
