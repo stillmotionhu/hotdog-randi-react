@@ -30,6 +30,11 @@ import { Link } from "@components/shared/link";
 import { ContinueWithGoogleButton } from "@components/features/auth/continue-with-google-button";
 import { FormResponse } from "@/types/form-response";
 
+/**
+ * STYLES FOR THE WHOLE PAGE
+ */
+import "./page.styles.scss";
+
 export default function SignInPage(): React.ReactNode {
   const { data, isSubmitButtonDisabled, status }: SignInState = useAppSelector(
     (state) => state.signIn,
@@ -46,7 +51,7 @@ export default function SignInPage(): React.ReactNode {
   };
 
   return (
-    <PageContainer isCentered>
+    <PageContainer id="signInPage" isCentered>
       <Card>
         <CardContainer>
           <CardHeader>

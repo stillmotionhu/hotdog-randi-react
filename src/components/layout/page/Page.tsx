@@ -16,15 +16,20 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
  * PAGE CONTAINER
  */
 interface PageContainerProps extends ParentComponentProps {
+  id?: string;
   isCentered?: boolean;
 }
 
 const PageContainer: React.FC<PageContainerProps> = ({
   children,
+  id,
   isCentered = false,
 }) => {
   return (
-    <div {...props(styles.container, isCentered && styles.containerCentered)}>
+    <div
+      {...props(styles.container, isCentered && styles.containerCentered)}
+      id={id}
+    >
       {children}
     </div>
   );
