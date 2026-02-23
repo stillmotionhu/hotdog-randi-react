@@ -6,7 +6,7 @@ const cardStyles = create({
     justifyContent: "center",
     width: "100%",
     padding: "20px",
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
     borderRadius: "40px",
     borderWidth: 1,
     borderStyle: "solid",
