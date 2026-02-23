@@ -104,7 +104,9 @@ const Form: React.FC<FormProps> = ({
 const FormSeparator: React.FC = () => {
   return (
     <div {...props(styles.separatorWrapper)}>
+      <span {...props(styles.separatorLine)}></span>
       <span {...props(styles.separatorText)}>or</span>
+      <span {...props(styles.separatorLine)}></span>
     </div>
   );
 };
