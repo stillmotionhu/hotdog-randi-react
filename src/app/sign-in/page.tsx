@@ -9,7 +9,9 @@ import {
   handleSignInFormOnChange,
   setSignInEmail,
   setSignInPassword,
+  signInFailed,
   signInIdle,
+  signInLoading,
   SignInState,
 } from "@features/sign-in/sign-in-slice";
 import { FormResponse } from "@/types/form-response";
@@ -62,7 +64,9 @@ export default function SignInPage(): React.ReactNode {
             <Form
               onChange={() => dispatch(handleSignInFormOnChange())}
               onSubmit={handleSignInFormSubmit}
-              resetFormStatus={() => dispatch(signInIdle())}
+              setFormIdleStatus={() => dispatch(signInIdle())}
+              setFormLoadingStatus={() => dispatch(signInLoading())}
+              setFormFailedStatus={() => dispatch(signInFailed())}
             >
               <Input
                 type="email"

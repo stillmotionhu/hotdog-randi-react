@@ -1,4 +1,15 @@
-import { create } from "@stylexjs/stylex";
+import { create, keyframes } from "@stylexjs/stylex";
+
+const inputErrorRevealKeyframes = keyframes({
+  "0%": {
+    opacity: 0,
+    transform: "scale(.85, .9)",
+  },
+  "100%": {
+    opacity: 1,
+    transform: "scale(1)",
+  },
+});
 
 const inputStyles = create({
   wrapper: {
@@ -22,11 +33,16 @@ const inputStyles = create({
       inset 0 -1px 0 rgba(255, 255, 255, 0.1),
       inset 0 0 30px 5px rgba(0, 0, 0, 0.02)`,
     backdropFilter: "blur(5px)",
-    transition: "transform .35s cubic-bezier(0.44, 1.14, 0.43, 1.32)",
+    transition:
+      "transform .35s cubic-bezier(0.44, 1.14, 0.43, 1.32), background-color 0.25s ease-out, border-color 0.25s ease-out",
     ":has(input:focus)": {
       transform: "scale(.95)",
       transition: "transform 0.45s cubic-bezier(0.44, 1.14, 0.43, 1.32)",
     },
+  },
+  fieldWrapperHasError: {
+    backgroundColor: "color-mix(in srgb, rgb(var(--danger-color)), white 98%)",
+    borderColor: "color-mix(in srgb, rgb(var(--danger-color)), white 93%)",
   },
   field: {
     fontSize: "1rem",
@@ -46,7 +62,7 @@ const inputStyles = create({
     ":has(~ svg)": {
       paddingLeft: "calc(25px + 1rem + 6px)",
     },
-    transition: "color .25s ease-in-out",
+    transition: "color .25s ease-out",
   },
   fieldHasError: {
     color: "color-mix(in srgb, rgb(var(--danger-color)), black 10%)",
@@ -68,7 +84,7 @@ const inputStyles = create({
     fontWeight: 700,
     lineHeight: "1rem",
     color: "rgba(100, 100, 100, 0.8)",
-    transition: "color .25s ease-in-out",
+    transition: "color .22s ease-out",
   },
   fieldLabelTextHidden: {
     visibility: "hidden",
@@ -80,13 +96,18 @@ const inputStyles = create({
       marginLeft: "2px",
     },
   },
-  fieldLabelHasError: {
+  fieldLabelTextHasError: {
     color: "color-mix(in srgb, rgb(var(--danger-color)), black 10%)",
   },
   errorWrapper: {
     display: "block",
     marginLeft: 2,
     marginBottom: 5,
+    transformOrigin: "top left",
+    animationName: inputErrorRevealKeyframes,
+    animationDuration: "0.35s",
+    animationTimingFunction: "cubic-bezier(0.165, 0.84, 0.44, 1)",
+    animationFillMode: "backwards",
   },
   errorText: {
     fontSize: ".875rem",

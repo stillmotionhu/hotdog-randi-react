@@ -93,8 +93,6 @@ const Input: React.FC<InputProps> = ({
 
     onValueChange(event.target.value);
 
-    console.log(error);
-
     if (
       !error ||
       (typeof error.primary === "undefined" &&
@@ -108,7 +106,9 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div {...props(styles.wrapper)}>
-      <div {...props(styles.fieldWrapper)}>
+      <div
+        {...props(styles.fieldWrapper, error && styles.fieldWrapperHasError)}
+      >
         <input
           {...props(styles.field, error && styles.fieldHasError)}
           type={type}
@@ -120,16 +120,14 @@ const Input: React.FC<InputProps> = ({
           onChange={handleInputChange}
         />
 
-        <label
-          {...props(styles.fieldLabel, error && styles.fieldLabelHasError)}
-          htmlFor={name}
-        >
+        <label {...props(styles.fieldLabel)} htmlFor={name}>
           {type === "search" && <SearchIcon />}
           <span
             {...props(
               styles.fieldLabelText,
               value !== "" && styles.fieldLabelTextHidden,
               required && styles.fieldLabelTextRequired,
+              error && styles.fieldLabelTextHasError,
             )}
           >
             {label}

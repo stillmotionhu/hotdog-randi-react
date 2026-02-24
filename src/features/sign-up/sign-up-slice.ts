@@ -5,14 +5,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
  */
 type SignUpStatus = "idle" | "loading" | "failed";
 
+export interface SignUpFormPayload {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export interface SignUpState {
-  data: {
-    firstname: string;
-    lastname: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  };
+  data: SignUpFormPayload;
   isSubmitButtonDisabled: boolean;
   status: SignUpStatus;
 }

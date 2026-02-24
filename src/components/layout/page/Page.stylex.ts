@@ -5,6 +5,7 @@ const pageStyles = create({
     display: "flex",
     justifyContent: "center",
     width: "100vw",
+    padding: "calc((100vw - var(--container-width)) / 2) 0",
   },
   container: {
     width: "var(--container-width)",

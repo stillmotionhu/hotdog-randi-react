@@ -27,7 +27,12 @@ function updateUserMetadata(uid: string, payload: UpdateUserMetadataPayload) {
       registeredAt: Timestamp.fromDate(new Date(payload.registeredAt)),
     };
 
-    await updateDoc(doc(usersCollection, uid), { metadata });
+    try {
+      await updateDoc(doc(usersCollection, uid), { metadata });
+    } catch (error) {
+      // TODO: Better error handling.
+      console.error(error);
+    }
   };
 }
 

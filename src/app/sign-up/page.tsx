@@ -8,10 +8,21 @@ import {
   setSignUpFirstname,
   setSignUpLastname,
   setSignUpPassword,
+  signUpFailed,
   signUpIdle,
+  signUpLoading,
   SignUpState,
 } from "@/features/sign-up/sign-up-slice";
+import {
+  validateSignUpFirstname,
+  validateSignUpLastname,
+  validateSignUpEmail,
+  validateSignUpPassword,
+  validateSignUpConfirmPassword,
+} from "@/features/sign-up/actions/validations";
+import { signUpUser } from "@/features/sign-up/actions/sign-up-user";
 import { FormResponse } from "@/types/form-response";
+import { FormError } from "@/types/form-error";
 
 import { PageContainer } from "@/components/layout/page";
 import {
@@ -41,9 +52,26 @@ export default function SignUpPage(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const handleSignUpFormSubmit = async (): Promise<FormResponse> => {
-    return {
-      success: true,
-    };
+    return signUpUser(data);
+  };
+
+  const handleSignUpFormValidation = (
+    targetName: string,
+  ): FormError | boolean => {
+    switch (targetName) {
+      case "firstname":
+        return validateSignUpFirstname(data);
+      case "lastname":
+        return validateSignUpLastname(data);
+      case "email":
+        return validateSignUpEmail(data);
+      case "password":
+        return validateSignUpPassword(data);
+      case "confirmPassword":
+        return validateSignUpConfirmPassword(data);
+      default:
+        return true;
+    }
   };
 
   return (
@@ -58,7 +86,10 @@ export default function SignUpPage(): React.ReactNode {
             <Form
               onChange={() => dispatch(handleSignUpFormOnChange())}
               onSubmit={handleSignUpFormSubmit}
-              resetFormStatus={() => dispatch(signUpIdle())}
+              setFormIdleStatus={() => dispatch(signUpIdle())}
+              setFormLoadingStatus={() => dispatch(signUpLoading())}
+              setFormFailedStatus={() => dispatch(signUpFailed())}
+              validate={handleSignUpFormValidation}
             >
               <Input
                 type="text"

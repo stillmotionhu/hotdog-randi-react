@@ -38,7 +38,7 @@ export function signInUserWithEmailAndPassword(payload: SignInPayload) {
       return {
         success: true,
       };
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof FirebaseError) {
         let payload: FormResponse;
 
