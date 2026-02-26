@@ -1,39 +1,33 @@
 import { usersCollection } from "@/app/firebase";
-import { AppDispatch } from "@/app/store";
+import { FetchError } from "@/types/fetch-error";
 import { doc, Timestamp, updateDoc } from "firebase/firestore";
-import { authFailed } from "../auth-slice";
 
-type UpdateUserMetadataPayload = {
+export type UpdateUserMetadataPayload = {
   lastSignInTime: string | undefined;
   registeredAt: string | undefined;
 };
 
-function updateUserMetadata(uid: string, payload: UpdateUserMetadataPayload) {
-  return async function updateUserMetadataThunk(dispatch: AppDispatch) {
-    if (!(payload.lastSignInTime && payload.registeredAt)) {
-      dispatch(
-        authFailed({
-          code: "auth/update-user-metadata-failed",
-          message: "Failed to update user metadata: Missing required fields.",
-          from: "firebase",
-        }),
-      );
-
-      return;
-    }
-
-    const metadata = {
-      lastSignInTime: Timestamp.fromDate(new Date(payload.lastSignInTime)),
-      registeredAt: Timestamp.fromDate(new Date(payload.registeredAt)),
+export async function updateUserMetadata(
+  uid: string,
+  payload: UpdateUserMetadataPayload,
+): Promise<void | FetchError> {
+  if (!(payload.lastSignInTime && payload.registeredAt)) {
+    return {
+      code: "auth/update-user-metadata-failed",
+      message: "Failed to update user metadata: Missing required fields.",
+      from: "firebase",
     };
+  }
 
-    try {
-      await updateDoc(doc(usersCollection, uid), { metadata });
-    } catch (error) {
-      // TODO: Better error handling.
-      console.error(error);
-    }
+  const metadata = {
+    lastSignInTime: Timestamp.fromDate(new Date(payload.lastSignInTime)),
+    registeredAt: Timestamp.fromDate(new Date(payload.registeredAt)),
   };
-}
 
-export { type UpdateUserMetadataPayload, updateUserMetadata };
+  try {
+    await updateDoc(doc(usersCollection, uid), { metadata });
+  } catch (error) {
+    // TODO: Better error handling.
+    console.error(error);
+  }
+}

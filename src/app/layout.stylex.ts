@@ -15,6 +15,7 @@ const bodyBackgroundPositionKeyframes = keyframes({
 const layoutStyles = create({
   body: {
     maxWidth: "100vw",
+    minHeight: "100vh",
     overflowX: "hidden",
     backgroundImage:
       "linear-gradient(300deg, #e3ecf7, #e3e3f7, #e9e3f7, #efe3f7)",

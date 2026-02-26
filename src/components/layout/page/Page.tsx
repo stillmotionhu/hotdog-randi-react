@@ -1,7 +1,10 @@
+"use client";
+
 import { ParentComponentProps } from "@/types/parent-component-props";
 import { props } from "@stylexjs/stylex";
 
 import { styles } from "./Page.stylex";
+import { useFirebaseAuth } from "@/providers/FirebaseAuthProvider";
 
 /**
  * PAGE WRAPPER
@@ -9,7 +12,14 @@ import { styles } from "./Page.stylex";
 interface PageWrapperProps extends ParentComponentProps {}
 
 const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
-  return <div {...props(styles.wrapper)}>{children}</div>;
+  const { isAuthenticated } = useFirebaseAuth();
+
+  return (
+    <>
+      {isAuthenticated && "navbar"}
+      <div {...props(styles.wrapper)}>{children}</div>
+    </>
+  );
 };
 
 /**
@@ -26,12 +36,12 @@ const PageContainer: React.FC<PageContainerProps> = ({
   isCentered = false,
 }) => {
   return (
-    <div
+    <main
       {...props(styles.container, isCentered && styles.containerCentered)}
       id={id}
     >
       {children}
-    </div>
+    </main>
   );
 };
 
