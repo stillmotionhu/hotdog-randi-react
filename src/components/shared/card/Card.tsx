@@ -33,10 +33,35 @@ const CardHeader: React.FC<CardHeaderProps> = ({ children }) => {
 /**
  * CARD TITLE
  */
-interface CardTitleProps extends ParentComponentProps {}
+interface CardTitleProps extends ParentComponentProps {
+  size?: "large" | "small";
+  casing?: "default" | "uppercase";
+}
 
-const CardTitle: React.FC<CardTitleProps> = ({ children }) => {
-  return <h2 {...props(styles.title)}>{children}</h2>;
+const CardTitle: React.FC<CardTitleProps> = ({
+  size = "large",
+  casing = "default",
+  children,
+}) => {
+  return (
+    <h2
+      {...props(
+        styles.title,
+        size === "large" && styles.titleLargeSize,
+        size === "small" && styles.titleSmallSize,
+        casing === "uppercase" && styles.titleUppercase,
+      )}
+    >
+      {children}
+    </h2>
+  );
+};
+
+/**
+ * CARD SUBTITLE
+ */
+const CardSubtitle: React.FC<ParentComponentProps> = ({ children }) => {
+  return <h3 {...props(styles.subtitle)}>{children}</h3>;
 };
 
 /**
@@ -57,4 +82,12 @@ const CardFooter: React.FC<CardFooterProps> = ({ children }) => {
   return <footer {...props(styles.footer)}>{children}</footer>;
 };
 
-export { Card, CardContainer, CardHeader, CardTitle, CardContent, CardFooter };
+export {
+  Card,
+  CardContainer,
+  CardHeader,
+  CardTitle,
+  CardSubtitle,
+  CardContent,
+  CardFooter,
+};

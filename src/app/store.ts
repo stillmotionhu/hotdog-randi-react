@@ -10,11 +10,13 @@ import {
  */
 import signInReducer from "@features/sign-in/sign-in-slice";
 import signUpReducer from "@features/sign-up/sign-up-slice";
+import userRatingsReducer from "@features/user-ratings/user-ratings-slice";
 
 const store: EnhancedStore = configureStore({
   reducer: {
     signIn: signInReducer,
     signUp: signUpReducer,
+    userRatings: userRatingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

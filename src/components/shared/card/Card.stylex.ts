@@ -26,15 +26,38 @@ const cardStyles = create({
   },
   header: {
     display: "flex",
+    flexDirection: "column",
+    gap: 0,
   },
   title: {
-    fontSize: "2rem",
     fontWeight: 700,
-    lineHeight: "2rem",
     color: "rgba(var(--foreground), 0.9)",
     marginTop: "0.5rem",
     marginLeft: "5px",
     marginBottom: "0.75rem",
+    ":has(~ h3)": {
+      marginLeft: 0,
+      marginBottom: 5,
+    },
+  },
+  titleLargeSize: {
+    fontSize: "2rem",
+    lineHeight: "2rem",
+  },
+  titleSmallSize: {
+    fontSize: 20,
+    lineHeight: "20px",
+  },
+  titleUppercase: {
+    textTransform: "uppercase",
+  },
+  subtitle: {
+    fontSize: 14,
+    lineHeight: "14px",
+    fontWeight: 500,
+    marginTop: 0,
+    marginLeft: 5,
+    marginBottom: 0,
   },
   content: {
     width: "100%",
