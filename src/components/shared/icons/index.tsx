@@ -1,23 +1,3 @@
-import { Icon } from "./Icon";
+import { Icon, IconVariants } from "./Icon";
 
-/**
- * STANDALONE ICONS
- */
-import { SearchIcon } from "./SearchIcon";
-
-/**
- * SOCIAL MEDIA ICONS
- */
-import { GoogleIcon } from "./GoogleIcon";
-
-export {
-  Icon,
-  /**
-   * STANDALONE ICONS
-   */
-  SearchIcon,
-  /**
-   * SOCIAL MEDIA ICONS
-   */
-  GoogleIcon,
-};
+export { Icon, type IconVariants };

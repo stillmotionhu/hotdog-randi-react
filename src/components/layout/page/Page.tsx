@@ -1,10 +1,12 @@
 "use client";
 
 import { ParentComponentProps } from "@/types/parent-component-props";
+import { useFirebaseAuth } from "@/providers/FirebaseAuthProvider";
 import { props } from "@stylexjs/stylex";
 
+import { Navbar } from "@/components/layout/navbar";
+
 import { styles } from "./Page.stylex";
-import { useFirebaseAuth } from "@/providers/FirebaseAuthProvider";
 
 /**
  * PAGE WRAPPER
@@ -16,7 +18,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
 
   return (
     <>
-      {isAuthenticated && "navbar"}
+      {isAuthenticated && <Navbar />}
       <div {...props(styles.wrapper)}>{children}</div>
     </>
   );

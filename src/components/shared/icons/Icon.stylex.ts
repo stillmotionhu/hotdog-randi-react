@@ -7,6 +7,12 @@ const iconStyles = create({
   size: (height) => ({
     height,
   }),
+  stroke: (stroke) => ({
+    stroke,
+  }),
+  strokeWidth: (strokeWidth) => ({
+    strokeWidth,
+  }),
 });
 
 export { iconStyles as styles };

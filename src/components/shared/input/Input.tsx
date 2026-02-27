@@ -8,7 +8,7 @@ import {
 } from "react";
 import { props } from "@stylexjs/stylex";
 
-import { SearchIcon } from "@components/shared/icons";
+import { Icon } from "@components/shared/icons";
 
 import { styles } from "./Input.stylex";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -121,7 +121,7 @@ const Input: React.FC<InputProps> = ({
         />
 
         <label {...props(styles.fieldLabel)} htmlFor={name}>
-          {type === "search" && <SearchIcon />}
+          {type === "search" && <Icon icon="search" />}
           <span
             {...props(
               styles.fieldLabelText,

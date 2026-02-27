@@ -1,4 +1,4 @@
-import { IconComponentProps } from "@/types/icon-component-props";
+import { HugeIconComponentProps } from "@/types/huge-icon-component-props";
 import { props } from "@stylexjs/stylex";
 
 import { styles } from "./Icon.stylex";
@@ -6,10 +6,19 @@ import { styles } from "./Icon.stylex";
 /**
  * SEARCH ICON
  */
-const SearchIcon: React.FC<IconComponentProps> = ({ size = 16 }) => {
+const SearchIcon: React.FC<HugeIconComponentProps> = ({
+  size = 16,
+  stroke = "black",
+  strokeWidth = 1,
+}) => {
   return (
     <svg
-      {...props(styles.icon, styles.size(size))}
+      {...props(
+        styles.icon,
+        styles.size(size),
+        styles.stroke(stroke),
+        styles.strokeWidth(strokeWidth),
+      )}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       color="currentColor"

@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   sassOptions: {
     implementation: "sass",
   },
+  devIndicators: false,
 };
 
 export default nextConfig;
