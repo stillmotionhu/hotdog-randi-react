@@ -16,6 +16,7 @@ const inputStyles = create({
     display: "flex",
     flexDirection: "column",
     gap: ".65rem",
+    width: "100%",
   },
   fieldWrapper: {
     position: "relative",
@@ -45,6 +46,8 @@ const inputStyles = create({
     borderColor: "color-mix(in srgb, rgb(var(--danger-color)), white 93%)",
   },
   field: {
+    position: "absolute",
+    top: 0,
     fontSize: "1rem",
     fontWeight: 500,
     lineHeight: "1rem",
@@ -64,13 +67,17 @@ const inputStyles = create({
     },
     transition: "color .25s ease-out",
   },
+  fieldWithIcon: {
+    paddingLeft: 52,
+  },
   fieldHasError: {
     color: "color-mix(in srgb, rgb(var(--danger-color)), black 10%)",
   },
   fieldLabel: {
     position: "absolute",
-    top: "7px",
-    left: "1px",
+    top: 0,
+    left: 1,
+    height: 60,
     display: "flex",
     flexDirection: "row",
     justifyContent: "start",
@@ -84,6 +91,7 @@ const inputStyles = create({
     fontWeight: 700,
     lineHeight: "1rem",
     color: "rgba(100, 100, 100, 0.8)",
+    marginTop: 2,
     transition: "color .22s ease-out",
   },
   fieldLabelTextHidden: {
@@ -98,6 +106,9 @@ const inputStyles = create({
   },
   fieldLabelTextHasError: {
     color: "color-mix(in srgb, rgb(var(--danger-color)), black 10%)",
+  },
+  fieldLabelIcon: {
+    marginTop: 2,
   },
   errorWrapper: {
     display: "block",

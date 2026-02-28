@@ -65,6 +65,10 @@ const Input: React.FC<InputProps> = ({
   const [error, setError] = useState<InputError | null>();
 
   useEffect(() => {
+    if (!errors) {
+      return;
+    }
+
     const errorAsPrimary = errors.find(
       (error: FormError) => error.target === name,
     );
@@ -110,7 +114,11 @@ const Input: React.FC<InputProps> = ({
         {...props(styles.fieldWrapper, error && styles.fieldWrapperHasError)}
       >
         <input
-          {...props(styles.field, error && styles.fieldHasError)}
+          {...props(
+            styles.field,
+            type === "search" && styles.fieldWithIcon,
+            error && styles.fieldHasError,
+          )}
           type={type}
           id={name}
           placeholder={label}
@@ -121,7 +129,11 @@ const Input: React.FC<InputProps> = ({
         />
 
         <label {...props(styles.fieldLabel)} htmlFor={name}>
-          {type === "search" && <Icon icon="search" />}
+          {type === "search" && (
+            <span {...props(styles.fieldLabelIcon)}>
+              <Icon icon="search" size={20} />
+            </span>
+          )}
           <span
             {...props(
               styles.fieldLabelText,

@@ -5,7 +5,8 @@ const ratingsWrapperStyles = create({
     display: "flex",
     justifyContent: "center",
     width: "100%",
-    paddingTop: 15,
+    paddingTop: 100,
+    paddingBottom: 110,
   },
 });
 
