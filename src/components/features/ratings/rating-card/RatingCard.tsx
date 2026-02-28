@@ -27,6 +27,10 @@ const RatingCardWrapper: React.FC<ParentComponentProps> = ({ children }) => {
       return;
     }
 
+    if (intersectionObserver) {
+      return;
+    }
+
     const intersectionObserverCallback: IntersectionObserverCallback = (
       entries: IntersectionObserverEntry[],
     ) => {
